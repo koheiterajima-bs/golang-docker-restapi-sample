@@ -1,0 +1,28 @@
+version: '2'
+# 複数のコンテナ(サービス)を定義するセクション
+services:
+  db:
+    # コンテナで使用するDockerイメージ
+    image: sample-api-db
+    # コンテナ名
+    container_name: sample-api-db
+    # dbディレクトリ内にあるDockerfileを使ってコンテナ用Dockerイメージをビルドする
+    build: db
+    # コンテナの環境変数定義
+    environment:
+      MYSQL_ROOT_PASSWORD: todo-password
+      TZ: "UTC"
+    # ホストとコンテナのポートをマッピングする(ここではMySQLのデフォルトポートの3306ポートを使用)
+    ports:
+      - "127.0.0.1:3306:3306"
+  api-server:
+    image: sample-api-server
+    container_name: sample-api-server
+    build:
+      context: ../
+      dockerfile: ./build/sample-api/dockerfile
+    ports:
+      - "127.0.0.1:8080:8080"
+    # api-serverが起動する前にdbサービスが起動している必要があることを指定
+    depends_on:
+      - db

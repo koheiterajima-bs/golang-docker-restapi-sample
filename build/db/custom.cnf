@@ -1,0 +1,23 @@
+# MySQLのサーバー側の設定を意味する
+[mysqld]
+# テーブル名の大文字、小文字の扱いを指定するオプション(1の場合、テーブル名はすべて小文字に変換されて保存される)
+lower_case_table_names=1
+
+# TIMESTAMP型のカラムにデフォルト値を明示的に設定する
+explicit_defaults_for_timestamp=true
+
+# SSLを使わずにMySQLサーバーを起動する設定
+skip_ssl
+
+# MySQLがデフォルトで使用する文字セット
+character-set-server=utf8mb4
+
+# サーバーがデフォルトで使用する照合順序
+collation-server=utf8mb4_bin
+
+# クライアントがMySQLサーバーに接続したときに最初に実行されるSQLコマンドを設定
+init_connect='SET collation_connection = utf8mb4_bin; SET NAMES utf8mb4'
+
+MySQLクライアント側の設定を意味する
+[client]
+default_character_set=utf8mb4
