@@ -1,4 +1,4 @@
-FROM golang:1.17.1-alpine as builder
+FROM golang:1.18-alpine as builder
 
 # コンテナ内で作業を行うディレクトリを/buildに設定する
 WORKDIR /build
@@ -16,7 +16,7 @@ ARG GOOS=linux
 ARG GOARCH=amd64
 
 # -ldflags '-s -w'はバイナリのサイズを小さくするためのオプション
-RUN go build -ldflags '-s -w' ./cmd/sample-alpine
+RUN go build -ldflags '-s -w' ./cmd/sample-api
 
 # 軽量な実行環境を作成する(ここからがマルチステージビルドの2つ目のステージ)
 FROM alpine

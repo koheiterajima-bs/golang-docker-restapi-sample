@@ -18,6 +18,6 @@ collation-server=utf8mb4_bin
 # クライアントがMySQLサーバーに接続したときに最初に実行されるSQLコマンドを設定
 init_connect='SET collation_connection = utf8mb4_bin; SET NAMES utf8mb4'
 
-MySQLクライアント側の設定を意味する
+# MySQLクライアント側の設定を意味する
 [client]
 default_character_set=utf8mb4
